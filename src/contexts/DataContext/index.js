@@ -30,13 +30,15 @@ export const DataProvider = ({ children }) => {
     if (data) return;
     getData();
   });
-  
+
   return (
     <DataContext.Provider
       // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
         data,
         error,
+        // Ajout de la value last //
+        last: data && data.events ? data.events[data.events.length - 1] : null,
       }}
     >
       {children}
