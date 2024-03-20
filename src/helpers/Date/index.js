@@ -13,4 +13,6 @@ export const MONTHS = {
   12: "décembre",
 };
 
-export const getMonth = (date) => MONTHS[date.getMonth()];
+// La variable date commence a 0 avec le mois de janvier, et termine a 11 avec le mois de décembre, il a donc fallut
+// ajouter un +1 au date.getMonth().
+export const getMonth = (date) => MONTHS[date.getMonth() + 1];
