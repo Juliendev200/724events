@@ -25,17 +25,17 @@ const Slider = () => {
 
   useEffect(() => {
 
-    // utilisation d'un set interval comme condition d'activation. 
+    // utilisation d'un set interval comme condition d'activation. //
     const transition = setInterval(() => {
       setIndex((current) =>
-        // Ajout du -1 pour corriger la slide blanc arrivée en fin de lecture tableau
+        // Ajout du -1 pour corriger la slide blanc arrivée en fin de lecture tableau //
         current < byDateDesc.length - 1 ? current + 1 : 0
-      ); // Incrémentation de l'index ou retour au début s'il atteint la fin
-    }, 5000); // Durée de transition
-    // réinitialisation de l'interval. 
+      ); // Incrémentation de l'index ou retour au début s'il atteint la fin //
+    }, 5000); // Durée de transition //
+    // réinitialisation de l'interval. //
     return () => clearInterval(transition);
   },
-    // reappel de la fonction lors de la modification de l'une des dépendances spécifiées
+    // reappel de la fonction lors de la modification de l'une des dépendances spécifiées //
     [index, byDateDesc.length]);
 
   return (
@@ -45,7 +45,7 @@ const Slider = () => {
         event,
         idx
       ) => (
-
+        //  Suppression du fragment qui générait le bug dû à une clé manquante <> // 
         <div
           key={event.title}
           className={`SlideCard SlideCard--${index === idx ? "display" : "hide"
@@ -64,13 +64,15 @@ const Slider = () => {
       )}
       <div className="SlideCard__paginationContainer">
         <div className="SlideCard__pagination">
+          {/* Ajout du parametre (event) pour pouvoir utiliser ses propriétés */}
           {byDateDesc?.map((event, radioIdx) => (
             <input
+              // Ajout dans le fichier data.focus d'une propriété id afin de pouvoir donner une valeur key a cet input //
               key={event.id}
               type="radio"
               name="radio-button"
               checked={index === radioIdx}
-              // Ajout de la prop value afin de pouvoir faire le pont entre les slides et les inputs. 
+              // Ajout de la prop value afin de pouvoir faire le pont entre les slides et les inputs. //
               value={radioIdx}
               onChange={handleOptionChange}
             />
